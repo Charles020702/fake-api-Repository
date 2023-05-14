@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <button class="btn btn1" onclick="get_record()">Get Record</button>
+    <button class="btn btn2" onclick="add_record()">Add Record</button>
+    <button class="btn btn3" onclick="update_record()">Update Record</button>
+    <button class="btn btn4" onclick="delete_record()">Delete Record</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <p id ="demo"></p>
+    <script>
+        function get_record() {
+            $.ajax({
+                url: "http://localhost/myproject/fake-api-activity/php/index.php",
+                method: "GET",
+                success: function(response) {
+                   document.getElementById("demo").innerHTML = JSON.stringify(response)
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");                    
+                    console.log(err.Message);
+                }
+            });
+        }
+
+        function add_record() {
+            $.ajax({
+                url: "http://localhost/myproject/fake-api-activity/php/index.php",
+                method: "POST",
+                data: {
+                    "name": "Pepito Manaloto",
+                    "course": "AB PolSci"
+                },
+                success: function(response) {
+                    document.getElementById("demo").innerHTML = JSON.stringify(response)
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");                    
+                    console.log(err.Message);
+                }
+            });
+        }
+
+        function update_record() {
+            $.ajax({
+                url: "http://localhost/myproject/fake-api-activity/php/index.php?id=1",
+                method: "PUT",
+                data: {
+                    "name": "Pedro Penduko",
+                    "course": "BSIT"
+                },
+                success: function(response) {
+                    document.getElementById("demo").innerHTML = JSON.stringify(response)
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");                    
+                    console.log(err.Message);
+                }
+            });
+        }
+
+        function delete_record() {
+            $.ajax({
+                url: "http://localhost/myproject/fake-api-activity/php/index.php?id=1",
+                method: "DELETE",
+                success: function(response) {
+                    document.getElementById("demo").innerHTML = JSON.stringify(response)
+                },
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");                    
+                    console.log(err.Message);
+                }
+            });
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>
